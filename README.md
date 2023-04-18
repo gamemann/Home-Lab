@@ -145,7 +145,7 @@ H/W path             Device     Class          Description
 
 Runs **Ubuntu 20.04** with KVM and QEMU for VMs, VLANs, and more.
 
-## Two (Powerball)
+### Two (Powerball)
 * [AMD Ryzen 5 3600](https://www.amd.com/en/product/8456) @ 3.6 GHz (6 cores and 12 threads)
 * 32 GBs of DDR4 RAM
 * 1 TB SSD
@@ -233,7 +233,7 @@ H/W path            Device      Class          Description
 /6                  macvtap4    network        Ethernet interface
 ```
 
-## Three (Spykids)
+### Three (Spykids)
 * [Intel i7-8700K](https://www.intel.com/content/www/us/en/products/sku/126684/intel-core-i78700k-processor-12m-cache-up-to-4-70-ghz/specifications.html) @ 3.7 GHz (6 cores and 12 threads)
 * RTX 2070 GPU
 * 48 GBs of DDR4 RAM (2 x 16 GBs and 2 x 8 GBs)
@@ -323,3 +323,19 @@ H/W path           Device     Class          Description
 /4                 input2     input          Power Button
 /5                 input3     input          Eee PC WMI hotkeys
 ```
+
+## Network
+### Router
+I have an EdgeRouter running EdgeRouterx software. I have each home server and WiFi on their own `/24` VLANs.
+
+### Switch
+I have an EdgeSwitch8 that all servers go through which handles VLAN tagging and untagging.
+
+## My Main Computer
+I have a powerful gaming desktop that I use for my main PC and also development work. I use VS Code and its Remote extension for developing projects on my home servers.
+
+* [AMD Ryzen 9 5900X](https://www.amd.com/en/products/cpu/amd-ryzen-9-5900x) @ 3.7 GHz (12 cores and 24 threads)
+* RTX 3090 TI
+* 64 GBs of DDR4 RAM
+* 2 x 2 TBs NVMe SSDs
+* 1 Gbps NIC
