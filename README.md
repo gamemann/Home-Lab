@@ -143,8 +143,6 @@ H/W path             Device     Class          Description
 /8                   fwpr106p0  network        Ethernet interface
 ```
 
-Runs **Ubuntu 20.04** with KVM and QEMU for VMs, VLANs, and more.
-
 ### Two (Powerball)
 * [AMD Ryzen 5 3600](https://www.amd.com/en/product/8456) @ 3.6 GHz (6 cores and 12 threads)
 * 32 GBs of DDR4 RAM
@@ -152,6 +150,8 @@ Runs **Ubuntu 20.04** with KVM and QEMU for VMs, VLANs, and more.
 * 2 TBs HDD
 * 1 Gbps NIC
 * **[Not Attached]** - 10 Gbps NIC
+
+Runs **Ubuntu 20.04** with KVM and QEMU for VMs, VLANs, and more.
 
 Output from `lshw -short`.
 
