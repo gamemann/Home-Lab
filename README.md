@@ -3,7 +3,7 @@ I created this repository to store information on my home lab. I have a pretty b
 
 ## Servers
 ### One (Classic)
-* [Intel Xeon L5640](https://ark.intel.com/content/www/us/en/ark/products/47926/intel-xeon-processor-l5640-12m-cache-2-26-ghz-5-86-gts-intel-qpi.html) @ 2.27 GHz (12 cores and 24 threads)
+* 2 x [Intel Xeon L5640](https://ark.intel.com/content/www/us/en/ark/products/47926/intel-xeon-processor-l5640-12m-cache-2-26-ghz-5-86-gts-intel-qpi.html) @ 2.27 GHz (12 cores and 24 threads total)
 * 32 GBs of DDR3 RAM
 * 150 GBs HDD
 * 300 GBs HDD
