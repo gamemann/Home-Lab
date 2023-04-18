@@ -331,6 +331,9 @@ I have an EdgeRouter running EdgeRouterx software. I have each home server and W
 ### Switch
 I have an EdgeSwitch8 that all servers go through which handles VLAN tagging and untagging.
 
+### WiFi
+I have a 2.4 GHz and 5 GHz WiFi router that acts as an access point, but has the option for creating your own LAN.
+
 ## My Main Computer
 I have a powerful gaming desktop that I use for my main PC and also development work. I use VS Code and its Remote extension for developing projects on my home servers.
 
