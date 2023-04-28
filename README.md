@@ -149,7 +149,7 @@ H/W path             Device     Class          Description
 * 1 TB SSD
 * 2 TBs HDD
 * 1 Gbps NIC
-* **[Not Attached]** - 10 Gbps NIC
+* 10 Gbps NIC - **Not Attached**
 
 Runs **Ubuntu 20.04** with KVM and QEMU for VMs, VLANs, and more.
 
