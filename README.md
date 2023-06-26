@@ -246,87 +246,89 @@ Runs **Ubuntu 22.04** with KVM and QEMU for VMs, VLANs, and more.
 Output from `lshw -short`.
 
 ```
-H/W path           Device     Class          Description
-========================================================
-                              system         System Product Name (ASUS_MB_CNL)
-/0                            bus            ROG STRIX Z390-E GAMING
-/0/0                          memory         64KiB BIOS
-/0/49                         memory         48GiB System Memory
-/0/49/0                       memory         8GiB DIMM DDR4 Synchronous 3000 MHz (0.3 ns)
-/0/49/1                       memory         16GiB DIMM DDR4 Synchronous 3000 MHz (0.3 ns)
-/0/49/2                       memory         8GiB DIMM DDR4 Synchronous 3000 MHz (0.3 ns)
-/0/49/3                       memory         16GiB DIMM DDR4 Synchronous 3000 MHz (0.3 ns)
-/0/54                         memory         384KiB L1 cache
-/0/55                         memory         1536KiB L2 cache
-/0/56                         memory         12MiB L3 cache
-/0/57                         processor      Intel(R) Core(TM) i7-8700K CPU @ 3.70GHz
-/0/100                        bridge         8th Gen Core Processor Host Bridge/DRAM Registers
-/0/100/1                      bridge         6th-10th Gen Core Processor PCIe Controller (x16)
-/0/100/1.1                    bridge         Xeon E3-1200 v5/E3-1500 v5/6th Gen Core Processor PCIe Controller (x8)
-/0/100/1.1/0       /dev/fb0   display        TU106 [GeForce RTX 2070]
-/0/100/1.1/0.1     card1      multimedia     TU106 High Definition Audio Controller
-/0/100/1.1/0.1/0   input10    input          HDA NVidia HDMI/DP,pcm=12
-/0/100/1.1/0.1/1   input4     input          HDA NVidia HDMI/DP,pcm=3
-/0/100/1.1/0.1/2   input5     input          HDA NVidia HDMI/DP,pcm=7
-/0/100/1.1/0.1/3   input6     input          HDA NVidia HDMI/DP,pcm=8
-/0/100/1.1/0.1/4   input7     input          HDA NVidia HDMI/DP,pcm=9
-/0/100/1.1/0.1/5   input8     input          HDA NVidia HDMI/DP,pcm=10
-/0/100/1.1/0.1/6   input9     input          HDA NVidia HDMI/DP,pcm=11
-/0/100/1.1/0.2                bus            TU106 USB 3.1 Host Controller
-/0/100/1.1/0.2/0   usb3       bus            xHCI Host Controller
-/0/100/1.1/0.2/1   usb4       bus            xHCI Host Controller
-/0/100/1.1/0.3                bus            TU106 USB Type-C UCSI Controller
-/0/100/14                     bus            Cannon Lake PCH USB 3.1 xHCI Host Controller
-/0/100/14/0        usb1       bus            xHCI Host Controller
-/0/100/14/0/6                 bus            USB2.0 Hub
-/0/100/14/0/6/4               input          AURA MOTHERBOARD
-/0/100/14/0/e                 communication  Bluetooth 9460/9560 Jefferson Peak (JfP)
-/0/100/14/1        usb2       bus            xHCI Host Controller
-/0/100/14.2                   memory         RAM memory
-/0/100/14.3        wlo1       network        Cannon Lake PCH CNVi WiFi
-/0/100/16                     communication  Cannon Lake PCH HECI Controller
-/0/100/17          scsi0      storage        SATA Controller [RAID mode]
-/0/100/17/0        /dev/sda   disk           2TB Samsung SSD 860
-/0/100/17/0/1                 volume         511MiB Windows FAT volume
-/0/100/17/0/2      /dev/sda2  volume         1862GiB EXT4 volume
-/0/100/17/1        /dev/sdb   disk           3TB ST3000DM008-2DM1
-/0/100/17/1/1      /dev/sdb1  volume         2794GiB EXT4 volume
-/0/100/17/0.0.0    /dev/sdc   disk           3TB ST3000DM008-2DM1
-/0/100/17/0.0.0/1  /dev/sdc1  volume         2794GiB EXT4 volume
-/0/100/1b                     bridge         Cannon Lake PCH PCI Express Root Port #17
-/0/100/1c                     bridge         Cannon Lake PCH PCI Express Root Port #1
-/0/100/1d                     bridge         Cannon Lake PCH PCI Express Root Port #9
-/0/100/1f                     bridge         Z390 Chipset LPC/eSPI Controller
-/0/100/1f/0                   system         PnP device PNP0c02
-/0/100/1f/1                   system         PnP device PNP0c02
-/0/100/1f/2                   communication  PnP device PNP0501
-/0/100/1f/3                   system         PnP device PNP0c02
-/0/100/1f/4                   generic        PnP device INT3f0d
-/0/100/1f/5                   system         PnP device PNP0c02
-/0/100/1f/6                   system         PnP device PNP0c02
-/0/100/1f/7                   system         PnP device PNP0c02
-/0/100/1f/8                   system         PnP device PNP0c02
-/0/100/1f.3        card0      multimedia     Cannon Lake PCH cAVS
-/0/100/1f.3/0      input11    input          HDA Intel PCH Front Mic
-/0/100/1f.3/1      input12    input          HDA Intel PCH Rear Mic
-/0/100/1f.3/2      input13    input          HDA Intel PCH Line
-/0/100/1f.3/3      input14    input          HDA Intel PCH Line Out Front
-/0/100/1f.3/4      input15    input          HDA Intel PCH Line Out Surround
-/0/100/1f.3/5      input16    input          HDA Intel PCH Line Out CLFE
-/0/100/1f.3/6      input17    input          HDA Intel PCH Front Headphone
-/0/100/1f.4                   bus            Cannon Lake PCH SMBus Controller
-/0/100/1f.5                   bus            Cannon Lake PCH SPI Controller
-/0/100/1f.6        eno2       network        Ethernet Connection (7) I219-V
-/1                            power          To Be Filled By O.E.M.
-/2                 input0     input          Sleep Button
-/3                 input1     input          Power Button
-/4                 input2     input          Power Button
-/5                 input3     input          Eee PC WMI hotkeys
+H/W path           Device           Class          Description
+==============================================================
+                                    system         System Product Name (ASUS_MB_CNL)
+/0                                  bus            ROG STRIX Z390-E GAMING
+/0/0                                memory         64KiB BIOS
+/0/49                               memory         48GiB System Memory
+/0/49/0                             memory         8GiB DIMM DDR4 Synchronous 3000 MHz (0.3 ns)
+/0/49/1                             memory         16GiB DIMM DDR4 Synchronous 3000 MHz (0.3 ns)
+/0/49/2                             memory         8GiB DIMM DDR4 Synchronous 3000 MHz (0.3 ns)
+/0/49/3                             memory         16GiB DIMM DDR4 Synchronous 3000 MHz (0.3 ns)
+/0/54                               memory         384KiB L1 cache
+/0/55                               memory         1536KiB L2 cache
+/0/56                               memory         12MiB L3 cache
+/0/57                               processor      Intel(R) Core(TM) i7-8700K CPU @ 3.70GHz
+/0/100                              bridge         8th Gen Core Processor Host Bridge/DRAM Registers
+/0/100/1                            bridge         6th-10th Gen Core Processor PCIe Controller (x16)
+/0/100/1.1                          bridge         Xeon E3-1200 v5/E3-1500 v5/6th Gen Core Processor PCIe Controller (x8)
+/0/100/1.1/0       /dev/fb0         display        TU106 [GeForce RTX 2070]
+/0/100/1.1/0.1     card1            multimedia     TU106 High Definition Audio Controller
+/0/100/1.1/0.1/0   input10          input          HDA NVidia HDMI/DP,pcm=12
+/0/100/1.1/0.1/1   input4           input          HDA NVidia HDMI/DP,pcm=3
+/0/100/1.1/0.1/2   input5           input          HDA NVidia HDMI/DP,pcm=7
+/0/100/1.1/0.1/3   input6           input          HDA NVidia HDMI/DP,pcm=8
+/0/100/1.1/0.1/4   input7           input          HDA NVidia HDMI/DP,pcm=9
+/0/100/1.1/0.1/5   input8           input          HDA NVidia HDMI/DP,pcm=10
+/0/100/1.1/0.1/6   input9           input          HDA NVidia HDMI/DP,pcm=11
+/0/100/1.1/0.2                      bus            TU106 USB 3.1 Host Controller
+/0/100/1.1/0.2/0   usb3             bus            xHCI Host Controller
+/0/100/1.1/0.2/1   usb4             bus            xHCI Host Controller
+/0/100/1.1/0.3                      bus            TU106 USB Type-C UCSI Controller
+/0/100/14                           bus            Cannon Lake PCH USB 3.1 xHCI Host Controller
+/0/100/14/0        usb1             bus            xHCI Host Controller
+/0/100/14/0/6                       bus            USB2.0 Hub
+/0/100/14/0/6/4                     input          AURA MOTHERBOARD
+/0/100/14/0/e                       communication  Bluetooth 9460/9560 Jefferson Peak (JfP)
+/0/100/14/1        usb2             bus            xHCI Host Controller
+/0/100/14/1/2                       generic        AX88179
+/0/100/14.2                         memory         RAM memory
+/0/100/14.3        wlo1             network        Cannon Lake PCH CNVi WiFi
+/0/100/16                           communication  Cannon Lake PCH HECI Controller
+/0/100/17          scsi0            storage        SATA Controller [RAID mode]
+/0/100/17/0        /dev/sda         disk           2TB Samsung SSD 860
+/0/100/17/0/1                       volume         511MiB Windows FAT volume
+/0/100/17/0/2      /dev/sda2        volume         1862GiB EXT4 volume
+/0/100/17/1        /dev/sdb         disk           3TB ST3000DM008-2DM1
+/0/100/17/1/1      /dev/sdb1        volume         2794GiB EXT4 volume
+/0/100/17/0.0.0    /dev/sdc         disk           3TB ST3000DM008-2DM1
+/0/100/17/0.0.0/1  /dev/sdc1        volume         2794GiB EXT4 volume
+/0/100/1b                           bridge         Cannon Lake PCH PCI Express Root Port #17
+/0/100/1c                           bridge         Cannon Lake PCH PCI Express Root Port #1
+/0/100/1d                           bridge         Cannon Lake PCH PCI Express Root Port #9
+/0/100/1f                           bridge         Z390 Chipset LPC/eSPI Controller
+/0/100/1f/0                         system         PnP device PNP0c02
+/0/100/1f/1                         system         PnP device PNP0c02
+/0/100/1f/2                         communication  PnP device PNP0501
+/0/100/1f/3                         system         PnP device PNP0c02
+/0/100/1f/4                         generic        PnP device INT3f0d
+/0/100/1f/5                         system         PnP device PNP0c02
+/0/100/1f/6                         system         PnP device PNP0c02
+/0/100/1f/7                         system         PnP device PNP0c02
+/0/100/1f/8                         system         PnP device PNP0c02
+/0/100/1f.3        card0            multimedia     Cannon Lake PCH cAVS
+/0/100/1f.3/0      input11          input          HDA Intel PCH Front Mic
+/0/100/1f.3/1      input12          input          HDA Intel PCH Rear Mic
+/0/100/1f.3/2      input13          input          HDA Intel PCH Line
+/0/100/1f.3/3      input14          input          HDA Intel PCH Line Out Front
+/0/100/1f.3/4      input15          input          HDA Intel PCH Line Out Surround
+/0/100/1f.3/5      input16          input          HDA Intel PCH Line Out CLFE
+/0/100/1f.3/6      input17          input          HDA Intel PCH Front Headphone
+/0/100/1f.4                         bus            Cannon Lake PCH SMBus Controller
+/0/100/1f.5                         bus            Cannon Lake PCH SPI Controller
+/0/100/1f.6        eno2             network        Ethernet Connection (7) I219-V
+/1                                  power          To Be Filled By O.E.M.
+/2                 input0           input          Sleep Button
+/3                 input1           input          Power Button
+/4                 input2           input          Power Button
+/5                 input3           input          Eee PC WMI hotkeys
+/6                 enx503f56022324  network        Ethernet interface
 ```
 
 ## Network
 ### Router
-I have an EdgeRouter running EdgeRouterx software. I have each home server and WiFi on their own `/24` VLANs.
+Starting on *June 26th, 2023*, I setup my home router as a VM on the Spykids home server due to my previous router becoming bricked. I've achieved this by having two ethernet ports, one on-board and the other through a USB to Ethernet converter, and creating their own bridges for WLAN and LAN. I then passed each bridged interface through the new router VM that runs [OPNsense](https://opnsense.org/)! From here, I've also setup different types of VLANs from my switch to my router.
 
 ### Switch
 I have an EdgeSwitch8 that all servers go through which handles VLAN tagging and untagging.
@@ -342,3 +344,9 @@ I have a powerful gaming desktop that I use for my main PC and also development 
 * 64 GBs of DDR4 RAM
 * 2 x 2 TBs NVMe SSDs
 * 1 Gbps NIC
+
+## Old Hardware
+### Router
+I had an EdgeRouter X running EdgeOS software. I had each home server and WiFi on their own `/24` VLANs and still do on the newer router.
+
+**This router bricked after attempting a firmware upgrade. It was replaced with the router mentioned above on Spykids (VM).
