@@ -347,6 +347,6 @@ I have a powerful gaming desktop that I use for my main PC and also development 
 
 ## Old Hardware
 ### Router
-I had an EdgeRouter X running EdgeOS software. I had each home server and WiFi on their own `/24` VLANs and still do on the newer router.
+I had an EdgeRouter X running EdgeOS software. I had each home server and WiFi on their own `/24` VLANs and still do on the newer router.**
 
 **This router bricked after attempting a firmware upgrade. It was replaced with the router mentioned above on Spykids (VM).
