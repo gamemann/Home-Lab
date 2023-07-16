@@ -239,7 +239,8 @@ H/W path            Device      Class          Description
 * 48 GBs of DDR4 RAM (2 x 16 GBs and 2 x 8 GBs)
 * 2 TBs SSD
 * 2 x 3 TBs HDD
-* 1 Gbps NIC
+* 1 Gbps NIC - Built-In (WAN)
+* 1 Gbps NIC - USB 3.0 To Ethernet (LAN) 
 
 Runs **Ubuntu 22.04** with KVM and QEMU for VMs, VLANs, and more.
 
