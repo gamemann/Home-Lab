@@ -329,7 +329,7 @@ H/W path           Device           Class          Description
 
 ## Network
 ### Router
-Starting on *June 26th, 2023*, I setup my home router as a VM on the Spykids home server due to my previous router becoming bricked. I've achieved this by having two ethernet ports, one on-board and the other through a USB to Ethernet converter, and creating their own bridges for WLAN and LAN. I then passed each bridged interface through the new router VM that runs [OPNsense](https://opnsense.org/)! From here, I've also setup different types of VLANs from my switch to my router.
+Starting on *June 26th, 2023*, I setup my home router as a VM on the Spykids home server due to my previous router becoming bricked. I've achieved this by having two ethernet ports, one on-board and the other through a USB to Ethernet converter, and creating their own bridges for WAN and LAN. I then passed each bridged interface through the new router VM that runs [OPNsense](https://opnsense.org/)! From here, I've also setup different types of VLANs from my switch to my router.
 
 ### Switch
 I have an EdgeSwitch8 that all servers go through which handles VLAN tagging and untagging.
