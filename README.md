@@ -234,7 +234,7 @@ H/W path            Device      Class          Description
 /6                  macvtap4    network        Ethernet interface
 ```
 
-### Three (Spykids)
+### Three (SpyKids)
 * [Intel i7-8700K](https://www.intel.com/content/www/us/en/products/sku/126684/intel-core-i78700k-processor-12m-cache-up-to-4-70-ghz/specifications.html) @ 3.7 GHz (6 cores and 12 threads)
 * RTX 2070 GPU
 * 48 GBs of DDR4 RAM (2 x 16 GBs and 2 x 8 GBs)
