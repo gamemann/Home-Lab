@@ -1,5 +1,7 @@
 # My Homelab
-I created this repository to store information on my homelab. I have a pretty big homelab consisting of three servers (one formerly my old gaming desktop technically).
+I created this repository to store information on my homelab and most of my devices I use publicly. I also like having things documented publicly in the case I forget specs on certain devices, etc. and I can't access the device (e.g. I'm away from home).
+
+I have a pretty big homelab consisting of three servers (one formerly my old gaming desktop technically).
 
 ## Servers
 ### One (Classic)
@@ -425,8 +427,8 @@ I have an EdgeSwitch8 that all servers go through which handles VLAN tagging and
 ### WiFi
 I have a 2.4 GHz and 5 GHz WiFi router that acts as an access point, but has the option for creating your own LAN.
 
-## My Main Computer
-I have a powerful gaming desktop that I use for my main PC and also development work. I use VS Code and its Remote extension for developing projects on my home servers.
+## My Desktop
+I have a powerful gaming desktop that I use as my main PC, development work, and general use such as gaming. I have Windows 11 installed, and I use VS Code and its Remote extension for developing projects on my home servers in VMs running Linux.
 
 * [AMD Ryzen 9 5900X](https://www.amd.com/en/products/cpu/amd-ryzen-9-5900x) @ 3.7 GHz (12 cores and 24 threads)
 * RTX 3090 TI
@@ -434,8 +436,11 @@ I have a powerful gaming desktop that I use for my main PC and also development 
 * 2 x 2 TBs NVMe SSDs
 * 1 Gbps NIC
 
+## My Laptop
+I have an [ASUS TUF Gaming A17](https://www.amazon.com/ASUS-IPS-Type-GeForce-Battery-TUF706IU-AS76/dp/B0863DFMV7) laptop with Ubuntu 22.04 installed that I use for development work and general use. I don't do much gaming on it unless I'm away from my home, but it handles most games just fine!
+
 ## Old Hardware
 ### Router
 I had an EdgeRouter X running EdgeOS software. I had each home server and WiFi on their own `/24` VLANs and still do on the newer router.
 
-**This router bricked after attempting a firmware upgrade. It was replaced with the router mentioned above on Spykids (VM).**
+**This router bricked after attempting a firmware upgrade. It was replaced with the router mentioned above.**
