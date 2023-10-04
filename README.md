@@ -346,7 +346,73 @@ All of my home servers, VMs, routers, and networks report statistics to the Graf
 ### Router
 Around late September of 2023, I decided to purchase an [HP EliteDesk 800 Thin Client](https://www.amazon.com/dp/B07Q1DL6LV) and install Proxmox onto the host with a VM created with [OPNsense](https://opnsense.org/) installed to act as my main router. Unfortunately, USB to Ethernet drivers are very inefficient in OPNsense/FreeBSD (very slow speeds, in my case) which is why I ended up virtualizing the router via [Proxmox](https://www.proxmox.com/en/), KVM, and QEMU. I've attached two [TP-Link USB To Ethernet](https://www.amazon.com/dp/B09GRL3VCN) adapters to the server so that I have a total of three NICs to utilize. The on-board NIC is assigned to WAN while one of the USB to Ethernet adapters is used for LAN. The last USB to Ethernet adapter is used for management. I've configured multiple VLANs for my home servers, WiFi, and more. I've also setup logging and statistics to a Grafana server I have hosted on a VM on one of my home servers.
 
-~~Starting on *June 26th, 2023*, I setup my home router as a VM on the Spykids home server due to my previous router becoming bricked. I've achieved this by having two ethernet ports, one on-board and the other through a USB to Ethernet converter, and creating their own bridges for WAN and LAN. I then passed each bridged interface through the new router VM that runs [OPNsense](https://opnsense.org/)! From here, I've also setup different types of VLANs from my switch to my router.~~
+I also understand using USB to Ethernet adapters isn't recommended, but I haven't had any issues with them speed-wise and they are capable of achieving gigabit speeds which is the most I really need in my LAN environment.
+
+Here's the output from `lshw -short` on the Proxmox host.
+
+```
+root@tc:~# lshw -short
+H/W path             Device           Class          Description
+================================================================
+                                      system         HP EliteDesk 800 G1 DM (K8S70UC#ABA)
+/0                                    bus            1825
+/0/0                                  memory         64KiB BIOS
+/0/9                                  processor      Intel(R) Core(TM) i5-4590T CPU @ 2.00GHz
+/0/9/a                                memory         1MiB L2 cache
+/0/9/b                                memory         256KiB L1 cache
+/0/9/c                                memory         6MiB L3 cache
+/0/d                                  memory         8GiB System Memory
+/0/d/0                                memory         4GiB SODIMM DDR3 Synchronous 1600 MHz (0.6 ns)
+/0/d/1                                memory         4GiB SODIMM DDR3 Synchronous 1600 MHz (0.6 ns)
+/0/100                                bridge         4th Gen Core Processor DRAM Controller
+/0/100/2             /dev/fb0         display        Xeon E3-1200 v3/4th Gen Core Processor Integrated Grap
+/0/100/3             card0            multimedia     Xeon E3-1200 v3/4th Gen Core Processor HD Audio Contro
+/0/100/3/0           input10          input          HDA Intel HDMI HDMI/DP,pcm=3
+/0/100/3/1           input11          input          HDA Intel HDMI HDMI/DP,pcm=7
+/0/100/3/2           input12          input          HDA Intel HDMI HDMI/DP,pcm=8
+/0/100/14                             bus            8 Series/C220 Series Chipset Family USB xHCI
+/0/100/14/0          usb3             bus            xHCI Host Controller
+/0/100/14/1          usb4             bus            xHCI Host Controller
+/0/100/14/1/1                         generic        AX88179
+/0/100/14/1/3                         generic        AX88179
+/0/100/16                             communication  8 Series/C220 Series Chipset Family MEI Controller #1
+/0/100/16.3                           communication  8 Series/C220 Series Chipset Family KT Controller
+/0/100/19            eno1             network        Ethernet Connection I217-LM
+/0/100/1a                             bus            8 Series/C220 Series Chipset Family USB EHCI #2
+/0/100/1a/1          usb1             bus            EHCI Host Controller
+/0/100/1a/1/1                         bus            Integrated Rate Matching Hub
+/0/100/1b            card1            multimedia     8 Series/C220 Series Chipset High Definition Audio Con
+/0/100/1b/0          input7           input          HDA Intel PCH Mic
+/0/100/1b/1          input8           input          HDA Intel PCH Line Out
+/0/100/1b/2          input9           input          HDA Intel PCH Front Headphone
+/0/100/1d                             bus            8 Series/C220 Series Chipset Family USB EHCI #1
+/0/100/1d/1          usb2             bus            EHCI Host Controller
+/0/100/1d/1/1                         bus            Integrated Rate Matching Hub
+/0/100/1f                             bridge         Q87 Express LPC Controller
+/0/100/1f/0                           system         PnP device PNP0c01
+/0/100/1f/1                           system         PnP device PNP0c02
+/0/100/1f/2                           system         PnP device PNP0b00
+/0/100/1f/3                           generic        PnP device INT3f0d
+/0/100/1f/4                           system         PnP device PNP0c02
+/0/100/1f/5                           input          PnP device PNP0303
+/0/100/1f/6                           input          PnP device PNP0f03
+/0/100/1f/7                           system         PnP device PNP0c02
+/0/100/1f/8                           generic        PnP device IFX0102
+/0/100/1f/9                           system         PnP device PNP0c02
+/0/100/1f.2          scsi0            storage        8 Series/C220 Series Chipset Family 6-port SATA Contro
+/0/100/1f.2/0.0.0    /dev/sda         disk           256GB KingFast
+/0/100/1f.2/0.0.0/1  /dev/sda1        volume         1006KiB BIOS Boot partition
+/0/100/1f.2/0.0.0/2  /dev/sda2        volume         1023MiB Windows FAT volume
+/0/100/1f.2/0.0.0/3  /dev/sda3        volume         237GiB LVM Physical Volume
+/0/100/1f.3                           bus            8 Series/C220 Series Chipset Family SMBus Controller
+/1                                    power          High Efficiency
+/2                   input0           input          Power Button
+/3                   input1           input          Power Button
+/4                   input5           input          PC Speaker
+/5                   input6           input          HP WMI hotkeys
+/6                   enx7cc2c6496f11  network        Ethernet interface
+/7                   enx7cc2c6496f15  network        Ethernet interface
+```
 
 ### Switch
 I have an EdgeSwitch8 that all servers go through which handles VLAN tagging and untagging.
