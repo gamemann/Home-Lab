@@ -1,5 +1,5 @@
 # My Home Lab
-I created this repository to store information on my home lab. I have a pretty big home lab consisting of three home servers (one formerly my old gaming desktop technically).
+I created this repository to store information on my home lab. I have a pretty big homelab consisting of three servers (one formerly my old gaming desktop technically).
 
 ## Servers
 ### One (Classic)
@@ -143,11 +143,12 @@ H/W path             Device     Class          Description
 /8                   fwpr106p0  network        Ethernet interface
 ```
 
-### Two (Powerball)
+### Two (PowerBall)
 * [AMD Ryzen 5 3600](https://www.amd.com/en/product/8456) @ 3.6 GHz (6 cores and 12 threads)
 * 32 GBs of DDR4 RAM
 * 1 TB SSD
 * 2 TBs HDD
+* 8 TBs External HDD drive
 * 1 Gbps NIC
 * 10 Gbps NIC - **Not Attached**
 
@@ -327,9 +328,17 @@ H/W path           Device           Class          Description
 /6                 enx503f56022324  network        Ethernet interface
 ```
 
+## Raspberry Pis
+I have three [Raspberry Pi Model B](https://www.amazon.com/Raspberry-Model-2019-Quad-Bluetooth/dp/B07TC2BK1X) units that I like experimenting with. I've also purchased a sensor kit for these Raspberry Pi units and hope to create a weather station with them at some point in the future!
+
+## Statistics
+I have a [Grafana](https://grafana.com/) server listening on a VM on one of my home servers with InfluxDB and Prometheus as data sources. All of my home servers, VMs, router, and network report statistics to the Grafana server as seen below!
+
 ## Network
 ### Router
-Starting on *June 26th, 2023*, I setup my home router as a VM on the Spykids home server due to my previous router becoming bricked. I've achieved this by having two ethernet ports, one on-board and the other through a USB to Ethernet converter, and creating their own bridges for WAN and LAN. I then passed each bridged interface through the new router VM that runs [OPNsense](https://opnsense.org/)! From here, I've also setup different types of VLANs from my switch to my router.
+Around late September of 2023, I decided to purchase an [HP EliteDesk 800 Thin Client](https://www.amazon.com/dp/B07Q1DL6LV) and install Proxmox onto the host with a VM created with [OPNsense](https://opnsense.org/) installed to act as my main router. Unfortunately, USB to Ethernet drivers are very inefficient in OPNsense/FreeBSD (very slow speeds, in my case) which is why I ended up virtualizing the router via [Proxmox](https://www.proxmox.com/en/), KVM, and QEMU. I've attached two [TP-Link USB To Ethernet](https://www.amazon.com/dp/B09GRL3VCN) adapters to the server so that I have a total of three NICs to utilize. The on-board NIC is assigned to WAN while one of the USB to Ethernet adapters is used for LAN. The last USB to Ethernet adapter is used for management. I've configured multiple VLANs for my home servers, WiFi, and more. I've also setup logging and statistics to a Grafana server I have hosted on a VM on one of my home servers.
+
+~~Starting on *June 26th, 2023*, I setup my home router as a VM on the Spykids home server due to my previous router becoming bricked. I've achieved this by having two ethernet ports, one on-board and the other through a USB to Ethernet converter, and creating their own bridges for WAN and LAN. I then passed each bridged interface through the new router VM that runs [OPNsense](https://opnsense.org/)! From here, I've also setup different types of VLANs from my switch to my router.~~
 
 ### Switch
 I have an EdgeSwitch8 that all servers go through which handles VLAN tagging and untagging.
