@@ -332,7 +332,15 @@ H/W path           Device           Class          Description
 I have three [Raspberry Pi Model B](https://www.amazon.com/Raspberry-Model-2019-Quad-Bluetooth/dp/B07TC2BK1X) units that I like experimenting with. I've also purchased a sensor kit for these Raspberry Pi units and hope to create a weather station with them at some point in the future!
 
 ## Statistics
-I have a [Grafana](https://grafana.com/) server listening on a VM on one of my home servers with InfluxDB and Prometheus as data sources. All of my home servers, VMs, router, and network report statistics to the Grafana server as seen below!
+I have a [Grafana](https://grafana.com/) server listening on a VM on one of my home servers with InfluxDB and Prometheus as data sources. The Grafana VM's main OS is installed onto an SSD, but the data from Prometheus and InfluxDB are stored on an HDD due to having a lot more space.
+
+All of my home servers, VMs, routers, and networks report statistics to the Grafana server as seen below!
+
+![Grafana Image #1](./images/grafana1.png)
+![Grafana Image #2](./images/grafana2.png)
+![Grafana Image #3](./images/grafana3.png)
+![Grafana Image #4](./images/grafana4.png)
+![Grafana Image #5](./images/grafana5.png)
 
 ## Network
 ### Router
