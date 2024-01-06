@@ -151,9 +151,9 @@ H/W path             Device     Class          Description
 * 1 x 2 TBs NVMe SSD (Samsung 970 EVO)
 * 1 x 1 TBs SATA SSD (Samsung 860)
 * 1 x 2 TBs HDD
-* 1 x 8 TBs External HDD drive
-* 1 Gbps NIC
-* 10 Gbps NIC - **Not Attached**
+* 1 x 8 TBs External HDD
+* 1 x 1 Gbps NIC
+* 1 x 10 Gbps NIC - **Not Attached**
 
 Runs **Ubuntu 20.04** with KVM and QEMU for VMs, VLANs, and more.
 
@@ -267,8 +267,8 @@ H/W path              Device          Class          Description
 * 48 GBs of DDR4 RAM (2 x 16 GBs and 2 x 8 GBs)
 * 1 x 2 TBs SSD (Samsung 860)
 * 2 x 3 TBs internal HDD
-* 12 TBs External HDD
-* 1 Gbps NIC
+* 1 x 12 TBs External HDD
+* 1 x 1 Gbps NIC
 
 Runs **Ubuntu 22.04** with KVM and QEMU for VMs, VLANs, and more.
 
@@ -458,7 +458,7 @@ I have a powerful gaming desktop that I use as my main PC, development work, and
 * 64 GBs of DDR4 RAM
 * 1 x 4 TBs NVMe SSD (WD Black SN850X)
 * 1 x 2 TBs NVMe SSD (Samsung 980 PRO)
-* 1 Gbps NIC
+* 1 x 1 Gbps NIC
 
 ## My Laptop
 I have an [ASUS TUF Gaming A17](https://www.amazon.com/ASUS-IPS-Type-GeForce-Battery-TUF706IU-AS76/dp/B0863DFMV7) laptop with Ubuntu 22.04 installed that I use for development work and general use. I don't do much gaming on it unless I'm away from my home, but it handles most games just fine!
