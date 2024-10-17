@@ -1,10 +1,338 @@
 # My Homelab
 I created this repository to store information on my homelab and most of my devices I use publicly. I also like having things documented publicly in the case I forget specs on certain devices, etc. and I can't access the device (e.g. I'm away from home).
 
-I have a pretty big homelab consisting of three servers (one formerly my old gaming desktop technically).
+I have a pretty big homelab consisting of three active/semi-active servers (one formerly my old gaming desktop technically).
 
-## Servers
-### One (Classic)
+## Active Servers
+### Xtreme
+* [Intel i7-13700K](https://www.intel.com/content/www/us/en/products/sku/230500/intel-core-i713700k-processor-30m-cache-up-to-5-40-ghz/specifications.html) @ 3.4 GHz Base Clock (16 cores and 24 threads)
+* 64 GBs of DDR4 RAM
+* 1 x 4 TBs NVMe SSD (Samsung 990 Pro)
+* 1 x 2.5 gbps NIC
+* **Liquid-cooled** with an [Arctic Freezer III 360mm AIO](https://www.arctic.de/us/Liquid-Freezer-III-360/ACFRE00136A) (radiator mounted as intake)!
+
+Runs **Debian 12** with KVM and QEMU for VMs, VLANs, and more.
+
+**NOTE** - A big con with this server is the CPU is very power hungry. I may undervolt the CPU in the future so it consumes less power, but it's fine for my needs right now and I require the high single-threaded performance for some things I use it for such as LAN packet generation/pen-testing. The CPU itself was fairly cheap and beat processors with more cores/threads at $100 - $200 more performance-wise.
+
+#### System Info
+Here's the output from `lshw -short`.
+
+```
+H/W path         Device          Class          Description
+===========================================================
+                                 system         B760M DS3H DDR4 (Default string)
+/0                               bus            B760M DS3H DDR4
+/0/0                             memory         64KiB BIOS
+/0/3b                            memory         64GiB System Memory
+/0/3b/0                          memory         16GiB DIMM DDR4 Synchronous 2133 MHz (0.5 ns)
+/0/3b/1                          memory         16GiB DIMM DDR4 Synchronous 2133 MHz (0.5 ns)
+/0/3b/2                          memory         16GiB DIMM DDR4 Synchronous 2133 MHz (0.5 ns)
+/0/3b/3                          memory         16GiB DIMM DDR4 Synchronous 2133 MHz (0.5 ns)
+/0/4c                            memory         384KiB L1 cache
+/0/4d                            memory         256KiB L1 cache
+/0/4e                            memory         16MiB L2 cache
+/0/4f                            memory         30MiB L3 cache
+/0/50                            memory         256KiB L1 cache
+/0/51                            memory         512KiB L1 cache
+/0/52                            memory         8MiB L2 cache
+/0/53                            memory         30MiB L3 cache
+/0/54                            processor      13th Gen Intel(R) Core(TM) i7-13700K
+/0/100                           bridge         Intel Corporation
+/0/100/2         /dev/fb0        display        Raptor Lake-S GT1 [UHD Graphics 770]
+/0/100/14                        bus            Intel Corporation
+/0/100/14/0      usb1            bus            xHCI Host Controller
+/0/100/14/0/7                    bus            USB2.0 Hub
+/0/100/14/0/b                    input          ITE Device
+/0/100/14/1      usb2            bus            xHCI Host Controller
+/0/100/14.2                      memory         RAM memory
+/0/100/15                        bus            Intel Corporation
+/0/100/15.1                      bus            Intel Corporation
+/0/100/15.2                      bus            Intel Corporation
+/0/100/15.3                      bus            Intel Corporation
+/0/100/16                        communication  Intel Corporation
+/0/100/17                        storage        Intel Corporation
+/0/100/19                        bus            Intel Corporation
+/0/100/19.1                      bus            Intel Corporation
+/0/100/1a                        bridge         Intel Corporation
+/0/100/1a/0      /dev/nvme0      storage        Samsung SSD 990 PRO 4TB
+/0/100/1a/0/0    hwmon1          disk           NVMe disk
+/0/100/1a/0/2    /dev/ng0n1      disk           NVMe disk
+/0/100/1a/0/1    /dev/nvme0n1    disk           4TB NVMe disk
+/0/100/1a/0/1/1  /dev/nvme0n1p1  volume         511MiB Windows FAT volume
+/0/100/1a/0/1/2  /dev/nvme0n1p2  volume         3724GiB EXT4 volume
+/0/100/1a/0/1/3  /dev/nvme0n1p3  volume         976MiB Linux swap volume
+/0/100/1c                        bridge         Intel Corporation
+/0/100/1c.2                      bridge         Intel Corporation
+/0/100/1c.2/0    enp3s0          network        RTL8125 2.5GbE Controller
+/0/100/1f                        bridge         Intel Corporation
+/0/100/1f/0                      system         PnP device PNP0c02
+/0/100/1f/1                      printer        PnP device PNP0400
+/0/100/1f/2                      communication  PnP device PNP0501
+/0/100/1f/3                      system         PnP device PNP0c02
+/0/100/1f/4                      system         PnP device PNP0c02
+/0/100/1f/5                      system         PnP device PNP0c02
+/0/100/1f/6                      system         PnP device PNP0c02
+/0/100/1f/7                      system         PnP device PNP0c02
+/0/100/1f/8                      system         PnP device PNP0c02
+/0/100/1f.3      card0           multimedia     Intel Corporation
+/0/100/1f.3/0    input10         input          HDA Intel PCH Rear Mic
+/0/100/1f.3/1    input11         input          HDA Intel PCH Line
+/0/100/1f.3/2    input12         input          HDA Intel PCH Line Out
+/0/100/1f.3/3    input13         input          HDA Intel PCH Front Headphone
+/0/100/1f.3/4    input14         input          HDA Intel PCH HDMI/DP,pcm=3
+/0/100/1f.3/5    input15         input          HDA Intel PCH HDMI/DP,pcm=7
+/0/100/1f.3/6    input16         input          HDA Intel PCH HDMI/DP,pcm=8
+/0/100/1f.3/7    input17         input          HDA Intel PCH HDMI/DP,pcm=9
+/0/100/1f.3/8    input9          input          HDA Intel PCH Front Mic
+/0/100/1f.4                      bus            Intel Corporation
+/0/100/1f.5                      bus            Intel Corporation
+/1                               power          To Be Filled By O.E.M.
+/2               input0          input          Sleep Button
+/3               input1          input          Power Button
+/4               input2          input          Power Button
+/5               input3          input          Intel HID events
+/6               input4          input          PC Speaker
+/7               input6          input          Video Bus
+```
+
+#### Stress Testing & CPU Temperatures
+I was able to achieve **5.3 GHz** on all *P-cores* (performance) and **4.2 GHz** on *E-cores* (efficiency) while under 70C CPU temperature using the `stress -c 24` command on Debian 12!
+
+![Stress Testing Screenshot](./images/x-stress.png)
+
+Here's a screenshot showing the clock speeds of each CPU while stress-testing.
+
+![Clock Speeds Screenshot](./images/x-clockspeeds.png)
+
+The idle temperatures are really great also!
+
+![Idle Screenshot](./images/x-idle.png)
+
+#### Build
+Lastly, here's a picture I took while building the server. The wire management is cleaner now!
+
+![Build](./images/x-inside.jpg)
+
+**NOTE** - I definitely didn't need a 850W PSU, but I might revamp the motherboard and get a GPU in the future which would require it.
+
+### PowerBall
+* [AMD Ryzen 5 3600](https://www.amd.com/en/product/8456) @ 3.6 GHz (6 cores and 12 threads)
+* 32 GBs of DDR4 RAM
+* 1 x 2 TBs NVMe SSD (Samsung 970 EVO)
+* 1 x 1 TBs SATA SSD (Samsung 860)
+* 1 x 2 TBs HDD
+* 1 x 8 TBs External HDD
+* 1 x 1 Gbps NIC
+* 1 x 10 Gbps NIC - **Not Attached**
+
+Runs **Ubuntu 20.04** with KVM and QEMU for VMs, VLANs, and more.
+
+#### System Info
+Here's the output from `lshw -short`.
+
+```
+H/W path              Device          Class          Description
+================================================================
+                                      system         To Be Filled By O.E.M. (To 
+/0                                    bus            B450M Pro4
+/0/0                                  memory         64KiB BIOS
+/0/c                                  memory         64GiB System Memory
+/0/c/0                                memory         16GiB DIMM DDR4 Synchronous
+/0/c/1                                memory         16GiB DIMM DDR4 Synchronous
+/0/c/2                                memory         16GiB DIMM DDR4 Synchronous
+/0/c/3                                memory         16GiB DIMM DDR4 Synchronous
+/0/f                                  memory         384KiB L1 cache
+/0/10                                 memory         3MiB L2 cache
+/0/11                                 memory         32MiB L3 cache
+/0/12                                 processor      AMD Ryzen 5 3600 6-Core Pro
+/0/100                                bridge         Starship/Matisse Root Compl
+/0/100/1.1                            bridge         Starship/Matisse GPP Bridge
+/0/100/1.1/0                          storage        NVMe SSD Controller SM981/P
+/0/100/1.1/0/0        /dev/nvme0      storage        Samsung SSD 970 EVO Plus 2T
+/0/100/1.1/0/0/1      /dev/nvme0n1    disk           2TB NVMe namespace
+/0/100/1.1/0/0/1/1    /dev/nvme0n1p1  volume         1863GiB EXT4 volume
+/0/100/1.3                            bridge         Starship/Matisse GPP Bridge
+/0/100/1.3/0                          bus            400 Series Chipset USB 3.1 
+/0/100/1.3/0/0        usb1            bus            xHCI Host Controller
+/0/100/1.3/0/1        usb2            bus            xHCI Host Controller
+/0/100/1.3/0.1                        storage        400 Series Chipset SATA Con
+/0/100/1.3/0.2                        bridge         400 Series Chipset PCIe Bri
+/0/100/1.3/0.2/0                      bridge         400 Series Chipset PCIe Por
+/0/100/1.3/0.2/0/0                    display        Turks PRO [Radeon HD 6570/7
+/0/100/1.3/0.2/0/0.1                  multimedia     Turks HDMI Audio [Radeon HD
+/0/100/1.3/0.2/1                      bridge         400 Series Chipset PCIe Por
+/0/100/1.3/0.2/1/0    enp5s0          network        RTL8111/8168/8411 PCI Expre
+/0/100/1.3/0.2/4                      bridge         400 Series Chipset PCIe Por
+/0/100/7.1                            bridge         Starship/Matisse Internal P
+/0/100/7.1/0                          generic        Starship/Matisse PCIe Dummy
+/0/100/8.1                            bridge         Starship/Matisse Internal P
+/0/100/8.1/0                          generic        Starship/Matisse Reserved S
+/0/100/8.1/0.1                        generic        Starship/Matisse Cryptograp
+/0/100/8.1/0.3                        bus            Matisse USB 3.0 Host Contro
+/0/100/8.1/0.3/0      usb3            bus            xHCI Host Controller
+/0/100/8.1/0.3/1      usb4            bus            xHCI Host Controller
+/0/100/8.1/0.3/1/1                    storage        Avolusion PRO-5Y
+/0/100/8.1/0.4                        multimedia     Starship/Matisse HD Audio C
+/0/100/8.2                            bridge         Starship/Matisse Internal P
+/0/100/8.2/0                          storage        FCH SATA Controller [AHCI m
+/0/100/8.3                            bridge         Starship/Matisse Internal P
+/0/100/8.3/0                          storage        FCH SATA Controller [AHCI m
+/0/100/14                             bus            FCH SMBus Controller
+/0/100/14.3                           bridge         FCH LPC Bridge
+/0/101                                bridge         Starship/Matisse PCIe Dummy
+/0/102                                bridge         Starship/Matisse PCIe Dummy
+/0/103                                bridge         Starship/Matisse PCIe Dummy
+/0/104                                bridge         Starship/Matisse PCIe Dummy
+/0/105                                bridge         Starship/Matisse PCIe Dummy
+/0/106                                bridge         Starship/Matisse PCIe Dummy
+/0/107                                bridge         Starship/Matisse PCIe Dummy
+/0/108                                bridge         Matisse Device 24: Function
+/0/109                                bridge         Matisse Device 24: Function
+/0/10a                                bridge         Matisse Device 24: Function
+/0/10b                                bridge         Matisse Device 24: Function
+/0/10c                                bridge         Matisse Device 24: Function
+/0/10d                                bridge         Matisse Device 24: Function
+/0/10e                                bridge         Matisse Device 24: Function
+/0/10f                                bridge         Matisse Device 24: Function
+/0/1                                  system         PnP device PNP0c01
+/0/2                                  system         PnP device PNP0c02
+/0/3                                  system         PnP device PNP0c02
+/0/4                                  system         PnP device PNP0b00
+/0/5                                  system         PnP device PNP0c02
+/0/6                                  communication  PnP device PNP0501
+/0/7                                  system         PnP device PNP0c02
+/0/8                  scsi10          storage        
+/0/8/0.0.0            /dev/sda        disk           8001GB Avolusion PRO-5Y
+/0/8/0.0.0/1          /dev/sda1       volume         7452GiB EXT4 volume
+/0/9                  scsi0           storage        
+/0/9/0.0.0            /dev/sdb        disk           1TB Samsung SSD 860
+/0/9/0.0.0/1          /dev/sdb1       volume         1023KiB BIOS Boot partition
+/0/9/0.0.0/2          /dev/sdb2       volume         1GiB EXT4 volume
+/0/9/0.0.0/3          /dev/sdb3       volume         930GiB EFI partition
+/0/a                  scsi4           storage        
+/0/a/0.0.0            /dev/sdc        volume         1863GiB ST2000DM008-2FR1
+/1                    macvtap9        network        Ethernet interface
+/2                    macvtap15       network        Ethernet interface
+/3                    macvtap5        network        Ethernet interface
+/4                    macvtap6        network        Ethernet interface
+/5                    macvtap3        network        Ethernet interface
+/6                    macvtap4        network        Ethernet interface
+/7                    macvtap14       network        Ethernet interface
+/8                    macvtap7        network        Ethernet interface
+/9                    macvtap2        network        Ethernet interface
+/a                    macvtap8        network        Ethernet interface
+/b                    macvtap11       network        Ethernet interface
+/c                    macvtap12       network        Ethernet interface
+/d                    macvtap13       network        Ethernet interface
+/e                    vnet0           network        Ethernet interface
+/f                    macvtap10       network        Ethernet interface
+/10                   macvtap1        network        Ethernet interface
+/11                   macvtap0        network        Ethernet interface
+/12                   macvtap16       network        Ethernet interface
+/13                   virbr0-nic      network        Ethernet interface
+```
+
+### SpyKids
+* [Intel i7-8700K](https://www.intel.com/content/www/us/en/products/sku/126684/intel-core-i78700k-processor-12m-cache-up-to-4-70-ghz/specifications.html) @ 3.7 GHz (6 cores and 12 threads)
+* RTX 2070 GPU
+* 48 GBs of DDR4 RAM (2 x 16 GBs and 2 x 8 GBs)
+* 1 x 2 TBs SSD (Samsung 860)
+* 2 x 3 TBs internal HDD
+* 1 x 12 TBs External HDD
+* 1 x 1 Gbps NIC
+
+Runs **Ubuntu 22.04** with KVM and QEMU for VMs, VLANs, and more.
+
+#### System Info
+Here's the output from `lshw -short`.
+
+```
+H/W path           Device     Class          Description
+========================================================
+                              system         System Product Name (ASUS_MB_CNL)
+/0                            bus            ROG STRIX Z390-E GAMING
+/0/0                          memory         64KiB BIOS
+/0/49                         memory         48GiB System Memory
+/0/49/0                       memory         8GiB DIMM DDR4 Synchronous 3000 MHz
+/0/49/1                       memory         16GiB DIMM DDR4 Synchronous 3000 MH
+/0/49/2                       memory         8GiB DIMM DDR4 Synchronous 3000 MHz
+/0/49/3                       memory         16GiB DIMM DDR4 Synchronous 3000 MH
+/0/54                         memory         384KiB L1 cache
+/0/55                         memory         1536KiB L2 cache
+/0/56                         memory         12MiB L3 cache
+/0/57                         processor      Intel(R) Core(TM) i7-8700K CPU @ 3.
+/0/100                        bridge         8th Gen Core Processor Host Bridge/
+/0/100/1                      bridge         6th-10th Gen Core Processor PCIe Co
+/0/100/1.1                    bridge         Xeon E3-1200 v5/E3-1500 v5/6th Gen 
+/0/100/1.1/0                  display        TU106 [GeForce RTX 2070]
+/0/100/1.1/0.1     card1      multimedia     TU106 High Definition Audio Control
+/0/100/1.1/0.1/0   input11    input          HDA NVidia HDMI/DP,pcm=3
+/0/100/1.1/0.1/1   input12    input          HDA NVidia HDMI/DP,pcm=7
+/0/100/1.1/0.1/2   input13    input          HDA NVidia HDMI/DP,pcm=8
+/0/100/1.1/0.1/3   input14    input          HDA NVidia HDMI/DP,pcm=9
+/0/100/1.1/0.2                bus            TU106 USB 3.1 Host Controller
+/0/100/1.1/0.2/0   usb3       bus            xHCI Host Controller
+/0/100/1.1/0.2/1   usb4       bus            xHCI Host Controller
+/0/100/1.1/0.3                bus            TU106 USB Type-C UCSI Controller
+/0/100/14                     bus            Cannon Lake PCH USB 3.1 xHCI Host C
+/0/100/14/0        usb1       bus            xHCI Host Controller
+/0/100/14/0/6                 bus            USB2.0 Hub
+/0/100/14/0/6/4               input          AURA MOTHERBOARD
+/0/100/14/0/9                 bus            USB2.0 Hub
+/0/100/14/0/9/1    input43    input          PixArt Cyberpower OpticalMouse Keyb
+/0/100/14/0/9/2    input46    input          Razer Razer Huntsman Elite
+/0/100/14/0/e                 communication  Bluetooth 9460/9560 Jefferson Peak 
+/0/100/14/1        usb2       bus            xHCI Host Controller
+/0/100/14/1/a                 storage        Avolusion PRO-5X
+/0/100/14.2                   memory         RAM memory
+/0/100/14.3        wlo1       network        Cannon Lake PCH CNVi WiFi
+/0/100/16                     communication  Cannon Lake PCH HECI Controller
+/0/100/17          scsi0      storage        SATA Controller [RAID mode]
+/0/100/17/0        /dev/sda   disk           2TB Samsung SSD 860
+/0/100/17/0/1      /dev/sda1  volume         511MiB Windows FAT volume
+/0/100/17/0/2      /dev/sda2  volume         1862GiB EXT4 volume
+/0/100/17/1        /dev/sdb   disk           3TB ST3000DM008-2DM1
+/0/100/17/1/1      /dev/sdb1  volume         2794GiB EXT4 volume
+/0/100/17/0.0.0    /dev/sdc   disk           3TB ST3000DM008-2DM1
+/0/100/17/0.0.0/1  /dev/sdc1  volume         2794GiB EXT4 volume
+/0/100/1b                     bridge         Cannon Lake PCH PCI Express Root Po
+/0/100/1c                     bridge         Cannon Lake PCH PCI Express Root Po
+/0/100/1d                     bridge         Cannon Lake PCH PCI Express Root Po
+/0/100/1f                     bridge         Z390 Chipset LPC/eSPI Controller
+/0/100/1f/0                   system         PnP device PNP0c02
+/0/100/1f/1                   system         PnP device PNP0c02
+/0/100/1f/2                   communication  PnP device PNP0501
+/0/100/1f/3                   system         PnP device PNP0c02
+/0/100/1f/4                   generic        PnP device INT3f0d
+/0/100/1f/5                   system         PnP device PNP0c02
+/0/100/1f/6                   system         PnP device PNP0c02
+/0/100/1f/7                   system         PnP device PNP0c02
+/0/100/1f/8                   system         PnP device PNP0c02
+/0/100/1f.3        card0      multimedia     Cannon Lake PCH cAVS
+/0/100/1f.3/0      input15    input          HDA Intel PCH Front Mic
+/0/100/1f.3/1      input16    input          HDA Intel PCH Rear Mic
+/0/100/1f.3/2      input17    input          HDA Intel PCH Line
+/0/100/1f.3/3      input18    input          HDA Intel PCH Line Out Front
+/0/100/1f.3/4      input19    input          HDA Intel PCH Line Out Surround
+/0/100/1f.3/5      input20    input          HDA Intel PCH Line Out CLFE
+/0/100/1f.3/6      input21    input          HDA Intel PCH Front Headphone
+/0/100/1f.4                   bus            Cannon Lake PCH SMBus Controller
+/0/100/1f.5                   bus            Cannon Lake PCH SPI Controller
+/0/100/1f.6        eno2       network        Ethernet Connection (7) I219-V
+/0/1               scsi6      storage        
+/0/1/0.0.0         /dev/sdd   disk           12TB Avolusion PRO-5X
+/0/1/0.0.0/1       /dev/sdd1  volume         10TiB EXT4 volume
+/1                            power          To Be Filled By O.E.M.
+/2                 /dev/fb0   display        EFI VGA
+/3                 input0     input          Sleep Button
+/4                 input1     input          Power Button
+/5                 input10    input          Eee PC WMI hotkeys
+/6                 input2     input          Power Button
+```
+
+## Old/Inactive Servers
+### Classic
 * 2 x [Intel Xeon L5640](https://ark.intel.com/content/www/us/en/ark/products/47926/intel-xeon-processor-l5640-12m-cache-2-26-ghz-5-86-gts-intel-qpi.html) @ 2.27 GHz (12 cores and 24 threads total)
 * 32 GBs of DDR3 RAM
 * 1 x 150 GBs HDD
@@ -14,7 +342,10 @@ I have a pretty big homelab consisting of three servers (one formerly my old gam
 
 Runs **Proxmox** for VMs, VLANs, and more.
 
-Output from `lshw -short`.
+**NOTE** - I do not use this home server anymore due to other servers I have. With that said, I'm pretty sure the HDDs are about to die.
+
+#### System Info
+Here's the output from `lshw -short`.
 
 ```
 H/W path             Device     Class          Description
@@ -143,219 +474,6 @@ H/W path             Device     Class          Description
 /6                   tap106i0   network        Ethernet interface
 /7                   tap100i1   network        Ethernet interface
 /8                   fwpr106p0  network        Ethernet interface
-```
-
-### Two (PowerBall)
-* [AMD Ryzen 5 3600](https://www.amd.com/en/product/8456) @ 3.6 GHz (6 cores and 12 threads)
-* 64 GBs of DDR4 RAM
-* 1 x 2 TBs NVMe SSD (Samsung 970 EVO)
-* 1 x 1 TBs SATA SSD (Samsung 860)
-* 1 x 2 TBs HDD
-* 1 x 8 TBs External HDD
-* 1 x 1 Gbps NIC
-* 1 x 10 Gbps NIC - **Not Attached**
-
-Runs **Ubuntu 20.04** with KVM and QEMU for VMs, VLANs, and more.
-
-Output from `lshw -short`.
-
-```
-H/W path              Device          Class          Description
-================================================================
-                                      system         To Be Filled By O.E.M. (To 
-/0                                    bus            B450M Pro4
-/0/0                                  memory         64KiB BIOS
-/0/c                                  memory         64GiB System Memory
-/0/c/0                                memory         16GiB DIMM DDR4 Synchronous
-/0/c/1                                memory         16GiB DIMM DDR4 Synchronous
-/0/c/2                                memory         16GiB DIMM DDR4 Synchronous
-/0/c/3                                memory         16GiB DIMM DDR4 Synchronous
-/0/f                                  memory         384KiB L1 cache
-/0/10                                 memory         3MiB L2 cache
-/0/11                                 memory         32MiB L3 cache
-/0/12                                 processor      AMD Ryzen 5 3600 6-Core Pro
-/0/100                                bridge         Starship/Matisse Root Compl
-/0/100/1.1                            bridge         Starship/Matisse GPP Bridge
-/0/100/1.1/0                          storage        NVMe SSD Controller SM981/P
-/0/100/1.1/0/0        /dev/nvme0      storage        Samsung SSD 970 EVO Plus 2T
-/0/100/1.1/0/0/1      /dev/nvme0n1    disk           2TB NVMe namespace
-/0/100/1.1/0/0/1/1    /dev/nvme0n1p1  volume         1863GiB EXT4 volume
-/0/100/1.3                            bridge         Starship/Matisse GPP Bridge
-/0/100/1.3/0                          bus            400 Series Chipset USB 3.1 
-/0/100/1.3/0/0        usb1            bus            xHCI Host Controller
-/0/100/1.3/0/1        usb2            bus            xHCI Host Controller
-/0/100/1.3/0.1                        storage        400 Series Chipset SATA Con
-/0/100/1.3/0.2                        bridge         400 Series Chipset PCIe Bri
-/0/100/1.3/0.2/0                      bridge         400 Series Chipset PCIe Por
-/0/100/1.3/0.2/0/0                    display        Turks PRO [Radeon HD 6570/7
-/0/100/1.3/0.2/0/0.1                  multimedia     Turks HDMI Audio [Radeon HD
-/0/100/1.3/0.2/1                      bridge         400 Series Chipset PCIe Por
-/0/100/1.3/0.2/1/0    enp5s0          network        RTL8111/8168/8411 PCI Expre
-/0/100/1.3/0.2/4                      bridge         400 Series Chipset PCIe Por
-/0/100/7.1                            bridge         Starship/Matisse Internal P
-/0/100/7.1/0                          generic        Starship/Matisse PCIe Dummy
-/0/100/8.1                            bridge         Starship/Matisse Internal P
-/0/100/8.1/0                          generic        Starship/Matisse Reserved S
-/0/100/8.1/0.1                        generic        Starship/Matisse Cryptograp
-/0/100/8.1/0.3                        bus            Matisse USB 3.0 Host Contro
-/0/100/8.1/0.3/0      usb3            bus            xHCI Host Controller
-/0/100/8.1/0.3/1      usb4            bus            xHCI Host Controller
-/0/100/8.1/0.3/1/1                    storage        Avolusion PRO-5Y
-/0/100/8.1/0.4                        multimedia     Starship/Matisse HD Audio C
-/0/100/8.2                            bridge         Starship/Matisse Internal P
-/0/100/8.2/0                          storage        FCH SATA Controller [AHCI m
-/0/100/8.3                            bridge         Starship/Matisse Internal P
-/0/100/8.3/0                          storage        FCH SATA Controller [AHCI m
-/0/100/14                             bus            FCH SMBus Controller
-/0/100/14.3                           bridge         FCH LPC Bridge
-/0/101                                bridge         Starship/Matisse PCIe Dummy
-/0/102                                bridge         Starship/Matisse PCIe Dummy
-/0/103                                bridge         Starship/Matisse PCIe Dummy
-/0/104                                bridge         Starship/Matisse PCIe Dummy
-/0/105                                bridge         Starship/Matisse PCIe Dummy
-/0/106                                bridge         Starship/Matisse PCIe Dummy
-/0/107                                bridge         Starship/Matisse PCIe Dummy
-/0/108                                bridge         Matisse Device 24: Function
-/0/109                                bridge         Matisse Device 24: Function
-/0/10a                                bridge         Matisse Device 24: Function
-/0/10b                                bridge         Matisse Device 24: Function
-/0/10c                                bridge         Matisse Device 24: Function
-/0/10d                                bridge         Matisse Device 24: Function
-/0/10e                                bridge         Matisse Device 24: Function
-/0/10f                                bridge         Matisse Device 24: Function
-/0/1                                  system         PnP device PNP0c01
-/0/2                                  system         PnP device PNP0c02
-/0/3                                  system         PnP device PNP0c02
-/0/4                                  system         PnP device PNP0b00
-/0/5                                  system         PnP device PNP0c02
-/0/6                                  communication  PnP device PNP0501
-/0/7                                  system         PnP device PNP0c02
-/0/8                  scsi10          storage        
-/0/8/0.0.0            /dev/sda        disk           8001GB Avolusion PRO-5Y
-/0/8/0.0.0/1          /dev/sda1       volume         7452GiB EXT4 volume
-/0/9                  scsi0           storage        
-/0/9/0.0.0            /dev/sdb        disk           1TB Samsung SSD 860
-/0/9/0.0.0/1          /dev/sdb1       volume         1023KiB BIOS Boot partition
-/0/9/0.0.0/2          /dev/sdb2       volume         1GiB EXT4 volume
-/0/9/0.0.0/3          /dev/sdb3       volume         930GiB EFI partition
-/0/a                  scsi4           storage        
-/0/a/0.0.0            /dev/sdc        volume         1863GiB ST2000DM008-2FR1
-/1                    macvtap9        network        Ethernet interface
-/2                    macvtap15       network        Ethernet interface
-/3                    macvtap5        network        Ethernet interface
-/4                    macvtap6        network        Ethernet interface
-/5                    macvtap3        network        Ethernet interface
-/6                    macvtap4        network        Ethernet interface
-/7                    macvtap14       network        Ethernet interface
-/8                    macvtap7        network        Ethernet interface
-/9                    macvtap2        network        Ethernet interface
-/a                    macvtap8        network        Ethernet interface
-/b                    macvtap11       network        Ethernet interface
-/c                    macvtap12       network        Ethernet interface
-/d                    macvtap13       network        Ethernet interface
-/e                    vnet0           network        Ethernet interface
-/f                    macvtap10       network        Ethernet interface
-/10                   macvtap1        network        Ethernet interface
-/11                   macvtap0        network        Ethernet interface
-/12                   macvtap16       network        Ethernet interface
-/13                   virbr0-nic      network        Ethernet interface
-```
-
-### Three (SpyKids)
-* [Intel i7-8700K](https://www.intel.com/content/www/us/en/products/sku/126684/intel-core-i78700k-processor-12m-cache-up-to-4-70-ghz/specifications.html) @ 3.7 GHz (6 cores and 12 threads)
-* RTX 2070 GPU
-* 48 GBs of DDR4 RAM (2 x 16 GBs and 2 x 8 GBs)
-* 1 x 2 TBs SSD (Samsung 860)
-* 2 x 3 TBs internal HDD
-* 1 x 12 TBs External HDD
-* 1 x 1 Gbps NIC
-
-Runs **Ubuntu 22.04** with KVM and QEMU for VMs, VLANs, and more.
-
-Output from `lshw -short`.
-
-```
-H/W path           Device     Class          Description
-========================================================
-                              system         System Product Name (ASUS_MB_CNL)
-/0                            bus            ROG STRIX Z390-E GAMING
-/0/0                          memory         64KiB BIOS
-/0/49                         memory         48GiB System Memory
-/0/49/0                       memory         8GiB DIMM DDR4 Synchronous 3000 MHz
-/0/49/1                       memory         16GiB DIMM DDR4 Synchronous 3000 MH
-/0/49/2                       memory         8GiB DIMM DDR4 Synchronous 3000 MHz
-/0/49/3                       memory         16GiB DIMM DDR4 Synchronous 3000 MH
-/0/54                         memory         384KiB L1 cache
-/0/55                         memory         1536KiB L2 cache
-/0/56                         memory         12MiB L3 cache
-/0/57                         processor      Intel(R) Core(TM) i7-8700K CPU @ 3.
-/0/100                        bridge         8th Gen Core Processor Host Bridge/
-/0/100/1                      bridge         6th-10th Gen Core Processor PCIe Co
-/0/100/1.1                    bridge         Xeon E3-1200 v5/E3-1500 v5/6th Gen 
-/0/100/1.1/0                  display        TU106 [GeForce RTX 2070]
-/0/100/1.1/0.1     card1      multimedia     TU106 High Definition Audio Control
-/0/100/1.1/0.1/0   input11    input          HDA NVidia HDMI/DP,pcm=3
-/0/100/1.1/0.1/1   input12    input          HDA NVidia HDMI/DP,pcm=7
-/0/100/1.1/0.1/2   input13    input          HDA NVidia HDMI/DP,pcm=8
-/0/100/1.1/0.1/3   input14    input          HDA NVidia HDMI/DP,pcm=9
-/0/100/1.1/0.2                bus            TU106 USB 3.1 Host Controller
-/0/100/1.1/0.2/0   usb3       bus            xHCI Host Controller
-/0/100/1.1/0.2/1   usb4       bus            xHCI Host Controller
-/0/100/1.1/0.3                bus            TU106 USB Type-C UCSI Controller
-/0/100/14                     bus            Cannon Lake PCH USB 3.1 xHCI Host C
-/0/100/14/0        usb1       bus            xHCI Host Controller
-/0/100/14/0/6                 bus            USB2.0 Hub
-/0/100/14/0/6/4               input          AURA MOTHERBOARD
-/0/100/14/0/9                 bus            USB2.0 Hub
-/0/100/14/0/9/1    input43    input          PixArt Cyberpower OpticalMouse Keyb
-/0/100/14/0/9/2    input46    input          Razer Razer Huntsman Elite
-/0/100/14/0/e                 communication  Bluetooth 9460/9560 Jefferson Peak 
-/0/100/14/1        usb2       bus            xHCI Host Controller
-/0/100/14/1/a                 storage        Avolusion PRO-5X
-/0/100/14.2                   memory         RAM memory
-/0/100/14.3        wlo1       network        Cannon Lake PCH CNVi WiFi
-/0/100/16                     communication  Cannon Lake PCH HECI Controller
-/0/100/17          scsi0      storage        SATA Controller [RAID mode]
-/0/100/17/0        /dev/sda   disk           2TB Samsung SSD 860
-/0/100/17/0/1      /dev/sda1  volume         511MiB Windows FAT volume
-/0/100/17/0/2      /dev/sda2  volume         1862GiB EXT4 volume
-/0/100/17/1        /dev/sdb   disk           3TB ST3000DM008-2DM1
-/0/100/17/1/1      /dev/sdb1  volume         2794GiB EXT4 volume
-/0/100/17/0.0.0    /dev/sdc   disk           3TB ST3000DM008-2DM1
-/0/100/17/0.0.0/1  /dev/sdc1  volume         2794GiB EXT4 volume
-/0/100/1b                     bridge         Cannon Lake PCH PCI Express Root Po
-/0/100/1c                     bridge         Cannon Lake PCH PCI Express Root Po
-/0/100/1d                     bridge         Cannon Lake PCH PCI Express Root Po
-/0/100/1f                     bridge         Z390 Chipset LPC/eSPI Controller
-/0/100/1f/0                   system         PnP device PNP0c02
-/0/100/1f/1                   system         PnP device PNP0c02
-/0/100/1f/2                   communication  PnP device PNP0501
-/0/100/1f/3                   system         PnP device PNP0c02
-/0/100/1f/4                   generic        PnP device INT3f0d
-/0/100/1f/5                   system         PnP device PNP0c02
-/0/100/1f/6                   system         PnP device PNP0c02
-/0/100/1f/7                   system         PnP device PNP0c02
-/0/100/1f/8                   system         PnP device PNP0c02
-/0/100/1f.3        card0      multimedia     Cannon Lake PCH cAVS
-/0/100/1f.3/0      input15    input          HDA Intel PCH Front Mic
-/0/100/1f.3/1      input16    input          HDA Intel PCH Rear Mic
-/0/100/1f.3/2      input17    input          HDA Intel PCH Line
-/0/100/1f.3/3      input18    input          HDA Intel PCH Line Out Front
-/0/100/1f.3/4      input19    input          HDA Intel PCH Line Out Surround
-/0/100/1f.3/5      input20    input          HDA Intel PCH Line Out CLFE
-/0/100/1f.3/6      input21    input          HDA Intel PCH Front Headphone
-/0/100/1f.4                   bus            Cannon Lake PCH SMBus Controller
-/0/100/1f.5                   bus            Cannon Lake PCH SPI Controller
-/0/100/1f.6        eno2       network        Ethernet Connection (7) I219-V
-/0/1               scsi6      storage        
-/0/1/0.0.0         /dev/sdd   disk           12TB Avolusion PRO-5X
-/0/1/0.0.0/1       /dev/sdd1  volume         10TiB EXT4 volume
-/1                            power          To Be Filled By O.E.M.
-/2                 /dev/fb0   display        EFI VGA
-/3                 input0     input          Sleep Button
-/4                 input1     input          Power Button
-/5                 input10    input          Eee PC WMI hotkeys
-/6                 input2     input          Power Button
 ```
 
 ## Raspberry Pis
