@@ -4,7 +4,7 @@ I created this repository to store information on my homelab and most of my devi
 I have a fairly large homelab with two active servers and two retired ones, including my old gaming desktop.
 
 ## Active Servers
-### Xtreme
+### Xtreme (4U Rackmount Server)
 * [Intel i7-13700K](https://www.intel.com/content/www/us/en/products/sku/230500/intel-core-i713700k-processor-30m-cache-up-to-5-40-ghz/specifications.html) @ 3.4 GHz Base Clock (16 cores and 24 threads)
 * 64 GBs of DDR4 RAM
 * 1 x 4 TBs NVMe SSD (Samsung 990 Pro)
@@ -125,7 +125,7 @@ Lastly, here's a picture I took while building the server. The wire management i
 
 **NOTE** - I definitely didn't need a 850W PSU, but I might revamp the motherboard and get a GPU in the future which would require it.
 
-### PowerBall
+### PowerBall (2U Rackmount Server)
 * [AMD Ryzen 5 3600](https://www.amd.com/en/product/8456) @ 3.6 GHz (6 cores and 12 threads)
 * 32 GBs of DDR4 RAM
 * 1 x 2 TBs NVMe SSD (Samsung 970 EVO)
@@ -221,8 +221,9 @@ H/W path                Device          Class          Description
 /3                      input2          input          PC Speaker
 ```
 
-## Store
+## Store (2U Rackmount Server)
 * Intel i5-13500 (16 cores and 20 threads, turbo up to 4.8 GHz)
+    * Uses a short [Noctua NH-L9i-17xx](https://www.amazon.com/dp/B09HCLB7M3) CPU cooler. Idle temps are around `25C` - `30C` which is fine for my needs!
 * 16 GBs of DDR4 RAM
 * 1 x 128 GBs NVMe SSD (for OS)
 * 2 x 18 TBs 7200 RPM HDDs in RAID 1 for backups and storage
@@ -230,7 +231,11 @@ H/W path                Device          Class          Description
 
 This is my newest home server built for storage purposes.
 
-Runs **Debian 13** and utilizes Docker.
+Runs **Debian 13**. Utilizes Docker and software RAID.
+
+![Store](./images/store-inside.png)
+
+*NOTE* - Horrible wire management in this picture, but it has been improved since then.
 
 ### System Info
 ```
