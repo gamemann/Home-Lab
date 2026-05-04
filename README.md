@@ -8,7 +8,7 @@ I have a fairly large homelab with two active servers and two retired ones, incl
 * [Intel i7-13700K](https://www.intel.com/content/www/us/en/products/sku/230500/intel-core-i713700k-processor-30m-cache-up-to-5-40-ghz/specifications.html) @ 3.4 GHz Base Clock (16 cores and 24 threads)
 * 64 GBs of DDR4 RAM
 * 1 x 4 TBs NVMe SSD (Samsung 990 Pro)
-* 2 x 3 TBs HDDs
+* 2 x 3 TBs HDDs (7200 RPM)
 * 1 x 12 TBs External HDD Via USB
 * 1 x 2.5 gbps NIC
 * **Liquid-cooled** with an [Arctic Freezer III 360mm AIO](https://www.arctic.de/us/Liquid-Freezer-III-360/ACFRE00136A) (radiator mounted as intake)!
@@ -131,115 +131,184 @@ Lastly, here's a picture I took while building the server. The wire management i
 * 1 x 2 TBs NVMe SSD (Samsung 970 EVO)
 * 1 x 1 TBs SATA SSD (Samsung 860)
 * 1 x 2 TBs HDD
-* 1 x 8 TBs External HDD
 * 1 x 1 Gbps NIC
 * 1 x 10 Gbps NIC - **Not Attached**
 
-Runs **Ubuntu 20.04** with KVM and QEMU for VMs, VLANs, and more.
+Runs **Proxmox** for virtual machines, VLANs, and more.
 
 #### System Info
 Here's the output from `lshw -short`.
 
 ```
-H/W path              Device          Class          Description
-================================================================
-                                      system         To Be Filled By O.E.M. (To 
-/0                                    bus            B450M Pro4
-/0/0                                  memory         64KiB BIOS
-/0/c                                  memory         64GiB System Memory
-/0/c/0                                memory         16GiB DIMM DDR4 Synchronous
-/0/c/1                                memory         16GiB DIMM DDR4 Synchronous
-/0/c/2                                memory         16GiB DIMM DDR4 Synchronous
-/0/c/3                                memory         16GiB DIMM DDR4 Synchronous
-/0/f                                  memory         384KiB L1 cache
-/0/10                                 memory         3MiB L2 cache
-/0/11                                 memory         32MiB L3 cache
-/0/12                                 processor      AMD Ryzen 5 3600 6-Core Pro
-/0/100                                bridge         Starship/Matisse Root Compl
-/0/100/1.1                            bridge         Starship/Matisse GPP Bridge
-/0/100/1.1/0                          storage        NVMe SSD Controller SM981/P
-/0/100/1.1/0/0        /dev/nvme0      storage        Samsung SSD 970 EVO Plus 2T
-/0/100/1.1/0/0/1      /dev/nvme0n1    disk           2TB NVMe namespace
-/0/100/1.1/0/0/1/1    /dev/nvme0n1p1  volume         1863GiB EXT4 volume
-/0/100/1.3                            bridge         Starship/Matisse GPP Bridge
-/0/100/1.3/0                          bus            400 Series Chipset USB 3.1 
-/0/100/1.3/0/0        usb1            bus            xHCI Host Controller
-/0/100/1.3/0/1        usb2            bus            xHCI Host Controller
-/0/100/1.3/0.1                        storage        400 Series Chipset SATA Con
-/0/100/1.3/0.2                        bridge         400 Series Chipset PCIe Bri
-/0/100/1.3/0.2/0                      bridge         400 Series Chipset PCIe Por
-/0/100/1.3/0.2/0/0                    display        Turks PRO [Radeon HD 6570/7
-/0/100/1.3/0.2/0/0.1                  multimedia     Turks HDMI Audio [Radeon HD
-/0/100/1.3/0.2/1                      bridge         400 Series Chipset PCIe Por
-/0/100/1.3/0.2/1/0    enp5s0          network        RTL8111/8168/8411 PCI Expre
-/0/100/1.3/0.2/4                      bridge         400 Series Chipset PCIe Por
-/0/100/7.1                            bridge         Starship/Matisse Internal P
-/0/100/7.1/0                          generic        Starship/Matisse PCIe Dummy
-/0/100/8.1                            bridge         Starship/Matisse Internal P
-/0/100/8.1/0                          generic        Starship/Matisse Reserved S
-/0/100/8.1/0.1                        generic        Starship/Matisse Cryptograp
-/0/100/8.1/0.3                        bus            Matisse USB 3.0 Host Contro
-/0/100/8.1/0.3/0      usb3            bus            xHCI Host Controller
-/0/100/8.1/0.3/1      usb4            bus            xHCI Host Controller
-/0/100/8.1/0.3/1/1                    storage        Avolusion PRO-5Y
-/0/100/8.1/0.4                        multimedia     Starship/Matisse HD Audio C
-/0/100/8.2                            bridge         Starship/Matisse Internal P
-/0/100/8.2/0                          storage        FCH SATA Controller [AHCI m
-/0/100/8.3                            bridge         Starship/Matisse Internal P
-/0/100/8.3/0                          storage        FCH SATA Controller [AHCI m
-/0/100/14                             bus            FCH SMBus Controller
-/0/100/14.3                           bridge         FCH LPC Bridge
-/0/101                                bridge         Starship/Matisse PCIe Dummy
-/0/102                                bridge         Starship/Matisse PCIe Dummy
-/0/103                                bridge         Starship/Matisse PCIe Dummy
-/0/104                                bridge         Starship/Matisse PCIe Dummy
-/0/105                                bridge         Starship/Matisse PCIe Dummy
-/0/106                                bridge         Starship/Matisse PCIe Dummy
-/0/107                                bridge         Starship/Matisse PCIe Dummy
-/0/108                                bridge         Matisse Device 24: Function
-/0/109                                bridge         Matisse Device 24: Function
-/0/10a                                bridge         Matisse Device 24: Function
-/0/10b                                bridge         Matisse Device 24: Function
-/0/10c                                bridge         Matisse Device 24: Function
-/0/10d                                bridge         Matisse Device 24: Function
-/0/10e                                bridge         Matisse Device 24: Function
-/0/10f                                bridge         Matisse Device 24: Function
-/0/1                                  system         PnP device PNP0c01
-/0/2                                  system         PnP device PNP0c02
-/0/3                                  system         PnP device PNP0c02
-/0/4                                  system         PnP device PNP0b00
-/0/5                                  system         PnP device PNP0c02
-/0/6                                  communication  PnP device PNP0501
-/0/7                                  system         PnP device PNP0c02
-/0/8                  scsi10          storage        
-/0/8/0.0.0            /dev/sda        disk           8001GB Avolusion PRO-5Y
-/0/8/0.0.0/1          /dev/sda1       volume         7452GiB EXT4 volume
-/0/9                  scsi0           storage        
-/0/9/0.0.0            /dev/sdb        disk           1TB Samsung SSD 860
-/0/9/0.0.0/1          /dev/sdb1       volume         1023KiB BIOS Boot partition
-/0/9/0.0.0/2          /dev/sdb2       volume         1GiB EXT4 volume
-/0/9/0.0.0/3          /dev/sdb3       volume         930GiB EFI partition
-/0/a                  scsi4           storage        
-/0/a/0.0.0            /dev/sdc        volume         1863GiB ST2000DM008-2FR1
-/1                    macvtap9        network        Ethernet interface
-/2                    macvtap15       network        Ethernet interface
-/3                    macvtap5        network        Ethernet interface
-/4                    macvtap6        network        Ethernet interface
-/5                    macvtap3        network        Ethernet interface
-/6                    macvtap4        network        Ethernet interface
-/7                    macvtap14       network        Ethernet interface
-/8                    macvtap7        network        Ethernet interface
-/9                    macvtap2        network        Ethernet interface
-/a                    macvtap8        network        Ethernet interface
-/b                    macvtap11       network        Ethernet interface
-/c                    macvtap12       network        Ethernet interface
-/d                    macvtap13       network        Ethernet interface
-/e                    vnet0           network        Ethernet interface
-/f                    macvtap10       network        Ethernet interface
-/10                   macvtap1        network        Ethernet interface
-/11                   macvtap0        network        Ethernet interface
-/12                   macvtap16       network        Ethernet interface
-/13                   virbr0-nic      network        Ethernet interface
+H/W path                Device          Class          Description
+==================================================================
+                                        system         To Be Filled By O.E.M. (To Be Filled By O.E.M.)
+/0                                      bus            B450M Pro4
+/0/0                                    memory         64KiB BIOS
+/0/c                                    memory         32GiB System Memory
+/0/c/0                                  memory         [empty]
+/0/c/1                                  memory         16GiB DIMM DDR4 Synchronous Unbuffered (Unregistered) 2133 MHz (0
+/0/c/2                                  memory         [empty]
+/0/c/3                                  memory         16GiB DIMM DDR4 Synchronous Unbuffered (Unregistered) 2133 MHz (0
+/0/f                                    memory         384KiB L1 cache
+/0/10                                   memory         3MiB L2 cache
+/0/11                                   memory         32MiB L3 cache
+/0/12                                   processor      AMD Ryzen 5 3600 6-Core Processor
+/0/100                                  bridge         Starship/Matisse Root Complex
+/0/100/1.1                              bridge         Starship/Matisse GPP Bridge
+/0/100/1.1/0            /dev/nvme0      storage        Samsung SSD 970 EVO Plus 2TB
+/0/100/1.1/0/0          hwmon0          disk           NVMe disk
+/0/100/1.1/0/2          /dev/ng0n1      disk           NVMe disk
+/0/100/1.1/0/1          /dev/nvme0n1    disk           2TB NVMe disk
+/0/100/1.1/0/1/1        /dev/nvme0n1p1  volume         1006KiB BIOS Boot partition
+/0/100/1.1/0/1/2        /dev/nvme0n1p2  volume         1023MiB Windows FAT volume
+/0/100/1.1/0/1/3        /dev/nvme0n1p3  volume         1862GiB LVM Physical Volume
+/0/100/1.3                              bridge         Starship/Matisse GPP Bridge
+/0/100/1.3/0                            bus            400 Series Chipset USB 3.1 xHCI Compliant Host Controller
+/0/100/1.3/0/0          usb1            bus            xHCI Host Controller
+/0/100/1.3/0/1          usb2            bus            xHCI Host Controller
+/0/100/1.3/0.1          scsi0           storage        400 Series Chipset SATA Controller
+/0/100/1.3/0.1/0        /dev/sda        disk           1TB Samsung SSD 860
+/0/100/1.3/0.1/0/1      /dev/sda1       volume         931GiB EXT4 volume
+/0/100/1.3/0.1/1        /dev/sdb        volume         1863GiB ST2000DM008-2FR1
+/0/100/1.3/0.2                          bridge         400 Series Chipset PCIe Bridge
+/0/100/1.3/0.2/0                        bridge         400 Series Chipset PCIe Port
+/0/100/1.3/0.2/0/0                      display        Turks PRO [Radeon HD 6570/7570/8550 / R5 230]
+/0/100/1.3/0.2/0/0.1    card0           multimedia     Turks HDMI Audio [Radeon HD 6500/6600 / 6700M Series]
+/0/100/1.3/0.2/0/0.1/0  input3          input          HDA ATI HDMI HDMI/DP,pcm=3
+/0/100/1.3/0.2/1                        bridge         400 Series Chipset PCIe Port
+/0/100/1.3/0.2/1/0      nic0            network        RTL8111/8168/8211/8411 PCI Express Gigabit Ethernet Controller
+/0/100/1.3/0.2/4                        bridge         400 Series Chipset PCIe Port
+/0/100/7.1                              bridge         Starship/Matisse Internal PCIe GPP Bridge 0 to bus[E:B]
+/0/100/7.1/0                            generic        Starship/Matisse PCIe Dummy Function
+/0/100/8.1                              bridge         Starship/Matisse Internal PCIe GPP Bridge 0 to bus[E:B]
+/0/100/8.1/0                            generic        Starship/Matisse Reserved SPP
+/0/100/8.1/0.1                          generic        Starship/Matisse Cryptographic Coprocessor PSPCPP
+/0/100/8.1/0.3                          bus            Matisse USB 3.0 Host Controller
+/0/100/8.1/0.3/0        usb3            bus            xHCI Host Controller
+/0/100/8.1/0.3/1        usb4            bus            xHCI Host Controller
+/0/100/8.1/0.4          card1           multimedia     Starship/Matisse HD Audio Controller
+/0/100/8.1/0.4/0        input4          input          HD-Audio Generic Rear Mic
+/0/100/8.1/0.4/1        input5          input          HD-Audio Generic Front Mic
+/0/100/8.1/0.4/2        input6          input          HD-Audio Generic Line
+/0/100/8.1/0.4/3        input7          input          HD-Audio Generic Line Out
+/0/100/8.1/0.4/4        input8          input          HD-Audio Generic Front Headphone
+/0/100/8.2                              bridge         Starship/Matisse Internal PCIe GPP Bridge 0 to bus[E:B]
+/0/100/8.2/0                            storage        FCH SATA Controller [AHCI mode]
+/0/100/8.3                              bridge         Starship/Matisse Internal PCIe GPP Bridge 0 to bus[E:B]
+/0/100/8.3/0                            storage        FCH SATA Controller [AHCI mode]
+/0/100/14                               bus            FCH SMBus Controller
+/0/100/14.3                             bridge         FCH LPC Bridge
+/0/100/14.3/0                           system         PnP device PNP0b00
+/0/100/14.3/1                           communication  PnP device PNP0501
+/0/101                                  bridge         Starship/Matisse PCIe Dummy Host Bridge
+/0/102                                  bridge         Starship/Matisse PCIe Dummy Host Bridge
+/0/103                                  bridge         Starship/Matisse PCIe Dummy Host Bridge
+/0/104                                  bridge         Starship/Matisse PCIe Dummy Host Bridge
+/0/105                                  bridge         Starship/Matisse PCIe Dummy Host Bridge
+/0/106                                  bridge         Starship/Matisse PCIe Dummy Host Bridge
+/0/107                                  bridge         Starship/Matisse PCIe Dummy Host Bridge
+/0/108                                  bridge         Matisse/Vermeer Data Fabric: Device 18h; Function 0
+/0/109                                  bridge         Matisse/Vermeer Data Fabric: Device 18h; Function 1
+/0/10a                                  bridge         Matisse/Vermeer Data Fabric: Device 18h; Function 2
+/0/10b                                  bridge         Matisse/Vermeer Data Fabric: Device 18h; Function 3
+/0/10c                                  bridge         Matisse/Vermeer Data Fabric: Device 18h; Function 4
+/0/10d                                  bridge         Matisse/Vermeer Data Fabric: Device 18h; Function 5
+/0/10e                                  bridge         Matisse/Vermeer Data Fabric: Device 18h; Function 6
+/0/10f                                  bridge         Matisse/Vermeer Data Fabric: Device 18h; Function 7
+/1                      input0          input          Power Button
+/2                      input1          input          Power Button
+/3                      input2          input          PC Speaker
+```
+
+## Store
+* Intel i5-13500 (16 cores and 20 threads, turbo up to 4.8 GHz)
+* 16 GBs of DDR4 RAM
+* 1 x 128 GBs NVMe SSD (for OS)
+* 2 x 18 TBs 7200 RPM HDDs in RAID 1 for backups and storage
+* 1 x 2.5 Gbps NIC
+
+This is my newest home server built for storage purposes.
+
+Runs **Debian 13** and utilizes Docker.
+
+### System Info
+```
+H/W path        Device          Class          Description
+==========================================================
+                                system         System Product Name (SKU)
+/0                              bus            B760M-AYW WIFI D4 II
+/0/0                            memory         64KiB BIOS
+/0/c                            memory         16GiB System Memory
+/0/c/0                          memory         8GiB DIMM DDR4 Synchronous 2666 MHz (0.4 ns)
+/0/c/1                          memory         8GiB DIMM DDR4 Synchronous 2666 MHz (0.4 ns)
+/0/19                           memory         288KiB L1 cache
+/0/1a                           memory         192KiB L1 cache
+/0/1b                           memory         7680KiB L2 cache
+/0/1c                           memory         24MiB L3 cache
+/0/1d                           memory         256KiB L1 cache
+/0/1e                           memory         512KiB L1 cache
+/0/1f                           memory         4MiB L2 cache
+/0/20                           memory         24MiB L3 cache
+/0/21                           processor      13th Gen Intel(R) Core(TM) i5-13500
+/0/100                          bridge         Intel Corporation
+/0/100/2                        display        AlderLake-S GT1
+/0/100/6                        bridge         12th Gen Core Processor PCI Express x4 Controller #0
+/0/100/6/0      /dev/nvme0      storage        Patriot M.2 P320 128GB
+/0/100/6/0/0    hwmon1          disk           NVMe disk
+/0/100/6/0/2    /dev/ng0n1      disk           NVMe disk
+/0/100/6/0/1    /dev/nvme0n1    disk           128GB NVMe disk
+/0/100/6/0/1/1  /dev/nvme0n1p1  volume         975MiB Windows FAT volume
+/0/100/6/0/1/2  /dev/nvme0n1p2  volume         112GiB EXT4 volume
+/0/100/6/0/1/3  /dev/nvme0n1p3  volume         6302MiB Linux swap volume
+/0/100/a                        generic        Platform Monitoring Technology
+/0/100/e                        storage        Volume Management Device NVMe RAID Controller
+/0/100/14                       bus            Raptor Lake USB 3.2 Gen 2x2 (20 Gb/s) XHCI Host Controller
+/0/100/14/0     usb1            bus            xHCI Host Controller
+/0/100/14/0/7                   input          AURA LED Controller
+/0/100/14/0/e                   communication  Wireless_Device
+/0/100/14/1     usb2            bus            xHCI Host Controller
+/0/100/14.2                     memory         RAM memory
+/0/100/15                       bus            Raptor Lake Serial IO I2C Host Controller #0
+/0/100/16                       communication  Raptor Lake CSME HECI #1
+/0/100/17       scsi6           storage        Raptor Lake SATA AHCI Controller
+/0/100/17/0     /dev/sda        disk           18TB OOS18000G
+/0/100/17/0/1   /dev/sda1       volume         16TiB RAID partition
+/0/100/17/1     /dev/sdb        disk           18TB OOS18000G
+/0/100/17/1/1   /dev/sdb1       volume         16TiB RAID partition
+/0/100/1a                       bridge         Raptor Lake PCI Express Root Port #25
+/0/100/1c                       bridge         Raptor Lake PCI Express Root Port #1
+/0/100/1c.1                     bridge         Intel Corporation
+/0/100/1c.1/0                   network        MEDIATEK Corp.
+/0/100/1c.7                     bridge         Intel Corporation
+/0/100/1c.7/0   enp5s0          network        RTL8125 2.5GbE Controller
+/0/100/1d                       bridge         Intel Corporation
+/0/100/1f                       bridge         Intel Corporation
+/0/100/1f/0                     system         PnP device PNP0c02
+/0/100/1f/1                     communication  PnP device PNP0501
+/0/100/1f/2                     system         PnP device PNP0c02
+/0/100/1f/3                     system         PnP device PNP0c02
+/0/100/1f/4                     system         PnP device PNP0c02
+/0/100/1f/5                     system         PnP device PNP0c02
+/0/100/1f/6                     system         PnP device PNP0c02
+/0/100/1f.3     card0           multimedia     Raptor Lake High Definition Audio Controller
+/0/100/1f.3/0   input10         input          HDA Intel PCH Front Headphone
+/0/100/1f.3/1   input11         input          HDA Intel PCH HDMI/DP,pcm=3
+/0/100/1f.3/2   input12         input          HDA Intel PCH HDMI/DP,pcm=7
+/0/100/1f.3/3   input13         input          HDA Intel PCH HDMI/DP,pcm=8
+/0/100/1f.3/4   input14         input          HDA Intel PCH HDMI/DP,pcm=9
+/0/100/1f.3/5   input6          input          HDA Intel PCH Rear Mic
+/0/100/1f.3/6   input7          input          HDA Intel PCH Front Mic
+/0/100/1f.3/7   input8          input          HDA Intel PCH Line
+/0/100/1f.3/8   input9          input          HDA Intel PCH Line Out
+/0/100/1f.4                     bus            Raptor Lake-S PCH SMBus Controller
+/0/100/1f.5                     bus            Raptor Lake SPI (flash) Controller
+/1              input0          input          Sleep Button
+/2              input1          input          Power Button
+/3              input2          input          Power Button
+/4              input3          input          PC Speaker
+/5              input4          input          Eee PC WMI hotkeys
+/6              input5          input          Video Bus
 ```
 
 ## Old/Inactive Servers
@@ -489,6 +558,11 @@ H/W path           Device     Class          Description
 ## Raspberry Pis
 I have three [Raspberry Pi Model B](https://www.amazon.com/Raspberry-Model-2019-Quad-Bluetooth/dp/B07TC2BK1X) units that I like experimenting with. I've also purchased a sensor kit for these Raspberry Pi units and hope to create a weather station with them at some point in the future!
 
+## Mini-PCs
+I have two mini-PCs I use for various purposes including streaming, testing, and more.
+
+Unfortunately Raspberry Pi units aren't the best for streaming, so I've found the mini-PCs to be better for that use case.
+
 ## Statistics
 I have a [Grafana](https://grafana.com/) server listening on a VM on one of my home servers with InfluxDB and Prometheus as data sources. The Grafana VM's main OS is installed onto an SSD, but the data from Prometheus and InfluxDB are stored on an HDD due to having a lot more space.
 
@@ -502,6 +576,54 @@ All of my home servers, VMs, routers, and networks report statistics to the Graf
 
 ## Network
 ### Router
+In early 2026, I decided to purchase a [Protectli Vault V1210](https://protectli.com/product/v1210/) from Amazon [here](https://www.amazon.com/dp/B0D36B2WB9).
+
+![Protectli Vault V1210](./images/vault.png)
+
+This includes an Intel NIC with 2 x 2.5 gbps ports which is fine for my local network needs. Additionally, it is designed for running custom router software such as OPNsense, which is what I'm running on it. I have multiple VLANs setup for my home servers, WiFi, and more. I've also setup logging and statistics to a Grafana server I have hosted on a VM on one of my home servers (see above).  
+
+### Switch
+I have an EdgeSwitch8 that all servers go through which handles VLAN tagging and untagging.
+
+### WiFi
+I have a 2.4 GHz and 5 GHz WiFi router that acts as an access point, but has the option for creating your own LAN.
+
+## My Desktop
+I have a powerful gaming desktop that I use as my main PC, development work, and general use such as gaming. I have Windows 11 installed, and I use VS Code and its Remote extension for developing projects on my home servers in VMs running Linux.
+
+* [AMD Ryzen 9 5900X](https://www.amd.com/en/products/cpu/amd-ryzen-9-5900x) @ 3.7 GHz (12 cores and 24 threads)
+* RTX 3090 TI
+* 64 GBs of DDR4 RAM
+* 1 x 4 TBs NVMe SSD (WD Black SN850X)
+* 1 x 2 TBs NVMe SSD (Samsung 980 PRO)
+* 1 x 1 Gbps NIC
+
+## My Laptops
+I've had a few laptops over the years that have ran various Linux distributions including:
+
+* *Linux Mint* (old laptop)
+* *CachyOS & Arch with [Hyprland](https://hypr.land/)* (my current laptop and broken laptop's setup)
+* Fedora 39, 40, and 41
+* Ubuntu 22.04 - 24.04
+* Nobara
+
+*Italics* = Currently used.
+
+### New (2024 - present)
+I had an Acer Nitro 16 that included an RTX 4060 and a decent AMD CPU with integrated graphics. However, the charging port kept having recurring issues and after sending it back for a repair once, the same issue happened again shortly afterwards. Eventually I ended up using its 65W USB-C power delivery port which was fine for my needs. However, this didn't even last a few months sadly.
+
+I finally ended up buying a new one with an Intel processor which includes an RTX 5070 (not a big difference sadly, but gaming laptop prices just suck in general).
+
+### Old (2020)
+I have an [ASUS TUF Gaming A17](https://www.amazon.com/ASUS-IPS-Type-GeForce-Battery-TUF706IU-AS76/dp/B0863DFMV7) laptop with Ubuntu 22.04 installed that I use for development work and general use. I don't do much gaming on it unless I'm away from my home, but it handles most games just fine!
+
+## Old Hardware
+### Router (ended 2022)
+I had an EdgeRouter X running EdgeOS software. I had each home server and WiFi on their own `/24` VLANs and still do on the newer router.
+
+**This router bricked after attempting a firmware upgrade. It was replaced with the router mentioned above.**
+
+### Router #2 (ended 2026)
 Around late September of 2023, I decided to purchase an [HP EliteDesk 800 Thin Client](https://www.amazon.com/dp/B07Q1DL6LV) and install Proxmox onto the host with a VM created with [OPNsense](https://opnsense.org/) installed to act as my main router. Unfortunately, USB to Ethernet drivers are very inefficient in OPNsense/FreeBSD (very slow speeds, in my case) which is why I ended up virtualizing the router via [Proxmox](https://www.proxmox.com/en/), KVM, and QEMU. I've attached two [TP-Link USB To Ethernet](https://www.amazon.com/dp/B09GRL3VCN) adapters to the server so that I have a total of three NICs to utilize. The on-board NIC is assigned to WAN while one of the USB to Ethernet adapters is used for LAN. The last USB to Ethernet adapter is used for management. I've configured multiple VLANs for my home servers, WiFi, and more. I've also setup logging and statistics to a Grafana server I have hosted on a VM on one of my home servers.
 
 I also understand using USB to Ethernet adapters isn't recommended, but I haven't had any issues with them speed-wise and they are capable of achieving gigabit speeds which is the most I really need in my LAN environment.
@@ -571,28 +693,3 @@ H/W path             Device           Class          Description
 /6                   enx7cc2c6496f11  network        Ethernet interface
 /7                   enx7cc2c6496f15  network        Ethernet interface
 ```
-
-### Switch
-I have an EdgeSwitch8 that all servers go through which handles VLAN tagging and untagging.
-
-### WiFi
-I have a 2.4 GHz and 5 GHz WiFi router that acts as an access point, but has the option for creating your own LAN.
-
-## My Desktop
-I have a powerful gaming desktop that I use as my main PC, development work, and general use such as gaming. I have Windows 11 installed, and I use VS Code and its Remote extension for developing projects on my home servers in VMs running Linux.
-
-* [AMD Ryzen 9 5900X](https://www.amd.com/en/products/cpu/amd-ryzen-9-5900x) @ 3.7 GHz (12 cores and 24 threads)
-* RTX 3090 TI
-* 64 GBs of DDR4 RAM
-* 1 x 4 TBs NVMe SSD (WD Black SN850X)
-* 1 x 2 TBs NVMe SSD (Samsung 980 PRO)
-* 1 x 1 Gbps NIC
-
-## My Laptop
-I have an [ASUS TUF Gaming A17](https://www.amazon.com/ASUS-IPS-Type-GeForce-Battery-TUF706IU-AS76/dp/B0863DFMV7) laptop with Ubuntu 22.04 installed that I use for development work and general use. I don't do much gaming on it unless I'm away from my home, but it handles most games just fine!
-
-## Old Hardware
-### Router
-I had an EdgeRouter X running EdgeOS software. I had each home server and WiFi on their own `/24` VLANs and still do on the newer router.
-
-**This router bricked after attempting a firmware upgrade. It was replaced with the router mentioned above.**
