@@ -221,7 +221,7 @@ H/W path                Device          Class          Description
 /3                      input2          input          PC Speaker
 ```
 
-## Store (2U Rackmount Server)
+### Store (2U Rackmount Server)
 * Intel i5-13500 (16 cores and 20 threads, turbo up to 4.8 GHz)
     * Uses a short [Noctua NH-L9i-17xx](https://www.amazon.com/dp/B09HCLB7M3) CPU cooler. Idle temps are around `25C` - `30C` which is fine for my needs!
 * 16 GBs of DDR4 RAM
@@ -237,7 +237,7 @@ Runs **Debian 13**. Utilizes Docker and software RAID.
 
 *NOTE* - Horrible wire management in this picture, but it has been improved since then.
 
-### System Info
+#### System Info
 ```
 H/W path        Device          Class          Description
 ==========================================================
